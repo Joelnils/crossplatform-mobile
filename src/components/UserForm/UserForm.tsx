@@ -7,9 +7,10 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Keyboard,
+  Keyboard, 
 } from 'react-native';
 import { useCreateUserMutation, useUpdateUserMutation } from '../../store/api/usersApi';
+import i18n from '../../../i18n';
 
 const UserForm = ({ route, navigation }) => {
   const user = route.params?.user; // Ta emot användarparametern
@@ -24,36 +25,36 @@ const UserForm = ({ route, navigation }) => {
   const handleCreate = async () => {
     // Logik för att skapa en ny användare
     if (!firstName.trim() || !lastName.trim()) {
-      Alert.alert('Error', 'Both fields are required.');
+      Alert.alert('Fel', 'Fyll i båda fältet.');
       return;
     }
 
     try {
       const result = await createUser({ user: { firstName, lastName } }).unwrap();
-      Alert.alert('Success', 'User created successfully');
+      Alert.alert('Succe', 'Du har skapat en användare');
       setFirstName('');
       setLastName('');
       navigation.navigate('UserList');
     } catch (error) {
-      Alert.alert('Error', error.data ? error.data : 'An error occurred. Please try again.');
+      Alert.alert('Fel', error.data ? error.data : 'Ett fel har inträffat. Försök igen.');
     }
   };
 
   const handleUpdate = async () => {
     // Logik för att uppdatera en befintlig användare
     if (!firstName.trim() || !lastName.trim()) {
-      Alert.alert('Error', 'Both fields are required.');
+      Alert.alert('Fel', 'Fyll i båda fälten.');
       return;
     }
 
     try {
       await updateUser({ userId: user.id, user: { firstName, lastName } }).unwrap();
-      Alert.alert('Success', 'User updated successfully');
+      Alert.alert('Succe', 'Användaren har uppdaterats');
       setFirstName('');
       setLastName('');
       navigation.navigate('UserList');
     } catch (error) {
-      Alert.alert('Error', error.data ? error.data : 'An error occurred. Please try again.');
+      Alert.alert('Fel', error.data ? error.data : 'Fel, Ett fel har inträffat, försök igen.');
     }
   };
 

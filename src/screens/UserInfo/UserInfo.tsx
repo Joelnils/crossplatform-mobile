@@ -37,12 +37,17 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		borderRadius: 12,
 		padding: 36,	
+		justifyContent: "center"
+
 	},
 	infoContainer: {
 		marginBottom: 24,
+
+		
 	},
 	actionsContainer: {
 		marginBottom: 24,
+		
 	}
 })
 export default UserInfo;
